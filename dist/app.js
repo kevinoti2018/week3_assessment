@@ -57,10 +57,14 @@ class Habits {
                 <p class='watch'><ion-icon name="alarm"></ion-icon></p>
                 <p>${habit.name}</p>
                 <p> ${habit.time}</p>
-                <div>
+                <div class='timeSince'>
                     <p>time since</p>
                     <p>${month} months</p>
                     <p>${days} days</p>
+                </div>
+                <div>
+                    <button onClick='Habits.restartHabit(${habit.id})'><ion-icon name="refresh-circle"></ion-icon></button>
+                    <button onClick='Habits.deleteHabit(${habit.id})'><ion-icon name="trash"></ion-icon></button>
                 </div>
                 </div>
             `;
@@ -72,6 +76,25 @@ class Habits {
         const time_input = document.querySelector('#time-input');
         console.log(habit_input.value);
         return { name: habit_input.value, time: time_input.value };
+    }
+    static deleteHabit(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield fetch(`http://localhost:3000/habbits/${id}`, {
+                method: 'DELETE'
+            });
+        });
+    }
+    static restartHabit(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield fetch(`http://localhost:3000/habbits/${id}`);
+            const habit = yield response.json();
+            habit.time = Date.now();
+            const updated = yield fetch(`http://localhost:3000/habbits/${id}`, {
+                method: 'PUT', body: JSON.stringify(habit), headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        });
     }
 }
 const create_button = document.querySelector('.create');

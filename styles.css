@@ -64,12 +64,12 @@ p{
 
 .bottom{
    display:grid;
-   grid-template-columns: repeat(4, 1fr);
+   grid-template-columns: repeat(3, 1fr);
    margin: 3rem 10rem;
    gap: 1rem;
 }
 .bottom .item{
-    width: 240px;
+    width: 300px;
     background: grey;
     height: 19rem;
     display:flex;

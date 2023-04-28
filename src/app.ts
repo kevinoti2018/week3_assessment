@@ -1,6 +1,7 @@
 interface Habit {
     name: string;
     time: string;
+    id?:number;
 }
 
 class Habits {
@@ -20,7 +21,7 @@ class Habits {
         }
     }
 
-    static async getHabits() {
+    static async getHabits(){
         const response = await fetch('http://localhost:3000/habbits');
         const data = await response.json() as Habit[];
         console.log(data)
@@ -52,10 +53,14 @@ class Habits {
                 <p class='watch'><ion-icon name="alarm"></ion-icon></p>
                 <p>${habit.name}</p>
                 <p> ${habit.time}</p>
-                <div>
+                <div class='timeSince'>
                     <p>time since</p>
                     <p>${month} months</p>
                     <p>${days} days</p>
+                </div>
+                <div>
+                    <button onClick='Habits.restartHabit(${habit.id})'><ion-icon name="refresh-circle"></ion-icon></button>
+                    <button onClick='Habits.deleteHabit(${habit.id})'><ion-icon name="trash"></ion-icon></button>
                 </div>
                 </div>
             `;
@@ -67,6 +72,23 @@ class Habits {
         const time_input = document.querySelector('#time-input') as HTMLInputElement;
             console.log( habit_input.value)
             return { name: habit_input.value, time: time_input.value };
+    }
+    static async deleteHabit(id:number){
+        const response = await fetch(`http://localhost:3000/habbits/${id}`,{
+            method:'DELETE'
+        });
+
+    }
+    static async restartHabit(id:number){
+        const response = await fetch(`http://localhost:3000/habbits/${id}`);
+        const habit = await response.json() as Habit[];
+        habit.time= Date.now()
+        const updated = await fetch(`http://localhost:3000/habbits/${id}`,{
+            method:'PUT', body:JSON.stringify(habit), headers:{
+                'Content-Type':'application/json'
+            }
+        });
+
     }
 }
 
