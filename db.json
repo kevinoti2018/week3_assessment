@@ -1,13 +1,19 @@
 {
-    "habbits":[
-        {
-            "name": "eat",
-            "time": "11:00"
-        },
-        {
-            "name": "cook",
-            "time": "11:00"
-        }
-        
-    ]
+  "habbits": [
+    {
+      "name": "eat",
+      "time": "11:00",
+      "id": 1
+    },
+    {
+      "name": "cook",
+      "time": "11:00",
+      "id": 2
+    },
+    {
+      "name": "hh",
+      "time": "04:44",
+      "id": 3
+    }
+  ]
 }

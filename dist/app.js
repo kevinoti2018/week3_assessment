@@ -14,7 +14,7 @@ class Habits {
             const habit = Habits.readValues();
             console.log(habit);
             if (habit) {
-                const response = yield fetch('http://localhost:3000/habits', {
+                const response = yield fetch('http://localhost:3000/habbits', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -51,8 +51,8 @@ class Habits {
 }
 const create_button = document.querySelector('.create');
 ;
-create_button.addEventListener('click', () => {
+create_button.addEventListener('click', () => __awaiter(void 0, void 0, void 0, function* () {
     console.log('click');
-    Habits.createHabit();
-});
+    yield Habits.createHabit();
+}));
 Habits.getHabits();

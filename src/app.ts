@@ -8,7 +8,7 @@ class Habits {
         const habit = Habits.readValues();
         console.log(habit)
         if (habit) {
-            const response = await fetch('http://localhost:3000/habits', {
+            const response = await fetch('http://localhost:3000/habbits', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -44,9 +44,9 @@ class Habits {
 }
 
 const create_button = document.querySelector('.create')as HTMLButtonElement;;
-create_button.addEventListener('click', () => {
+create_button.addEventListener('click', async() => {
     console.log('click');
-    Habits.createHabit();
+    await Habits.createHabit();
 });
 
 Habits.getHabits();
