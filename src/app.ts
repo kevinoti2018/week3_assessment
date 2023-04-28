@@ -28,8 +28,9 @@ class Habits {
         bottom.innerHTML = data.map(habit => {
             return `
             <div class='item'>
+                <p class='watch'><ion-icon name="alarm"></ion-icon></p>
                 <p>${habit.name}</p>
-                <p>${habit.time}</p>
+                <p> time started ${habit.time}</p>
                 </div>
             `;
         }).join('');
@@ -44,7 +45,8 @@ class Habits {
 }
 
 const create_button = document.querySelector('.create')as HTMLButtonElement;;
-create_button.addEventListener('click', async() => {
+create_button.addEventListener('click', async(e) => {
+    e.preventDefault()
     console.log('click');
     await Habits.createHabit();
 });

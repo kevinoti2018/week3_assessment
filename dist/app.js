@@ -35,8 +35,9 @@ class Habits {
             bottom.innerHTML = data.map(habit => {
                 return `
             <div class='item'>
+                <p class='watch'><ion-icon name="alarm"></ion-icon></p>
                 <p>${habit.name}</p>
-                <p>${habit.time}</p>
+                <p> time started ${habit.time}</p>
                 </div>
             `;
             }).join('');
@@ -51,7 +52,8 @@ class Habits {
 }
 const create_button = document.querySelector('.create');
 ;
-create_button.addEventListener('click', () => __awaiter(void 0, void 0, void 0, function* () {
+create_button.addEventListener('click', (e) => __awaiter(void 0, void 0, void 0, function* () {
+    e.preventDefault();
     console.log('click');
     yield Habits.createHabit();
 }));
