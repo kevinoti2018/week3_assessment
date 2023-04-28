@@ -71,7 +71,7 @@ p{
 .bottom .item{
     width: 240px;
     background: grey;
-    height: 9rem;
+    height: 19rem;
     display:flex;
     flex-direction: column;
     align-items: center;

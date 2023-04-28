@@ -31,13 +31,37 @@ class Habits {
             const response = yield fetch('http://localhost:3000/habbits');
             const data = yield response.json();
             console.log(data);
+            data.forEach(habit => {
+                // const time_difference = (Date.now()) - Date.parse(habit.time);
+                const habitTime = new Date(habit.time);
+                const time_difference = Date.now() - habitTime.getTime();
+                // console.log(time_difference);
+                const minutes = Math.floor(time_difference / 1000 * 60);
+                const hours = Math.floor(time_difference / 1000 * 60 * 60);
+                const days = Math.floor(time_difference / 1000 * 60 * 60 * 24);
+                const weeks = Math.floor(time_difference / (1000 * 60 * 60 * 24 * 7));
+                const months = Math.floor((Date.now() - habitTime.getTime()) / (1000 * 60 * 60 * 24 * 30));
+                console.log(months);
+            });
             const bottom = document.querySelector('.bottom');
             bottom.innerHTML = data.map(habit => {
+                const habitTime = new Date(habit.time);
+                const time_difference = Date.now() - habitTime.getTime();
+                // console.log(time_difference);
+                const days = Math.floor(time_difference / (1000 * 60 * 60 * 24));
+                const weeks = Math.floor(time_difference / (1000 * 60 * 60 * 24 * 7));
+                const month = Math.floor((Date.now() - habitTime.getTime()) / (1000 * 60 * 60 * 24 * 30));
+                console.log(month);
                 return `
             <div class='item'>
                 <p class='watch'><ion-icon name="alarm"></ion-icon></p>
                 <p>${habit.name}</p>
-                <p> time started ${habit.time}</p>
+                <p> ${habit.time}</p>
+                <div>
+                    <p>time since</p>
+                    <p>${month} months</p>
+                    <p>${days} days</p>
+                </div>
                 </div>
             `;
             }).join('');
